@@ -13,21 +13,6 @@ use App\Http\Controllers\Backend\ApplyJobController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-
-
-
-
 Route::get('user-registration', [AuthController::class, 'registration'])->name('user.registration');
 
 Route::post('user-store', [AuthController::class, 'store'])->name('user.store');
@@ -38,7 +23,7 @@ Route::post('user-login', [AuthController::class,'postlogin'])->name('user.login
 
 
 Route::group(['middleware' => 'userType:user'], function () {
-    // User routes here
+
 
 
 

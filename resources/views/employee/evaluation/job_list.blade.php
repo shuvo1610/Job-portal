@@ -18,7 +18,6 @@
             </tr>
             </thead>
             <tbody>
-
             @foreach($create_jobs as  $key=>$createjob)
                 <tr>
                     <th scope="row">{{$key+1}}</th>
@@ -26,7 +25,6 @@
                     <td>{{ $createjob->vacancies}}</td>
                     <td>{{ $createjob->companyName}}</td>
                     <td>{{ $createjob->location}}</td>
-
 
                     <td><img src="{{ asset('storage/' . $createjob->image) }}" alt="Image"></td>
                     <td>

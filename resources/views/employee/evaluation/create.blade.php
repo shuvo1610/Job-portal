@@ -67,7 +67,8 @@
         style="background-color: #fff; padding: 50px; border-radius: 20px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); max-width: 1050px; margin: 0 auto;">
         <div class="mb-5 container">
             <h3 class="text-center">{{ $circular->jobTitle }}</h3>
-            @foreach(optional($circular->job_quiz)->get() ?? [] as $quiz)
+
+            @foreach($data  as $quiz)
             <div class="question mb-3">Q.{{ $quiz->question }}</div>
             <div class="options">
                 <div class="option">
@@ -105,7 +106,7 @@
         @endif
 
         <h3 style="color: #1870AB;">Create Quiz</h3>
-        <form action="{{route('quiz.store',$circular->id)}}" method="post" enctype="multipart/form-data">
+        <form action="{{route('quiz.store', $circular->id)}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="row">
                 <div class="col-md-12 job-details">

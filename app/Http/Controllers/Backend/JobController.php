@@ -70,9 +70,9 @@ class JobController extends Controller
     }
 
     public function create_mcq($id){
-        $circular = CreateJob::findOrFail($id)->with('job_quiz')->first();
-//        dd($circular);
-        return view('employee.evaluation.create',['circular' => $circular]);
+        $circular = CreateJob::where('id',$id)->first();
+        $data = Quizze::where('job_id', $circular->id)->get();
+        return view('employee.evaluation.create', compact('data', 'circular'));
     }
 
     public function store_mcq(Request $request,$id){
