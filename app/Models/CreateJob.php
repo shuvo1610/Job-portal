@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class CreateJob extends Model
 {
@@ -31,6 +32,11 @@ class CreateJob extends Model
     public function quizzes(): HasMany
     {
         return $this->hasMany(Quizze::class, 'job_id');
+    }
+
+    public function assessment(): HasOne
+    {
+        return $this->hasOne(Assessment::class, 'create_job_id');
     }
 
 

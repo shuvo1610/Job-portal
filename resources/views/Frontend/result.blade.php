@@ -67,7 +67,9 @@
         <div class="mb-5 container">
             <h3 class="text-success">Thanks for the Test</h3>
             <p>Your Score is <strong>{{ $assessment->obtain_marks }} out of {{ $assessment->total_marks }}</strong></p>
-            <p>Soon, we'll contact with you</p>
+            <p>Soon, we'll contact with you & Now you can apply</p>
+            <a href="{{route('job.post',$assessment->create_job_id)}}"
+               class="btn btn-primary">Go For Apply</a>
         </div>
     </div>
 @endsection
