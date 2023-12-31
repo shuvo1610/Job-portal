@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class JobApplication extends Model
 {
     use HasFactory;
-    
+
     protected $fillable = [
         'user_id',
         'job_id',
@@ -18,6 +18,7 @@ class JobApplication extends Model
         'email',
         'phone_number',
         'resume',
+        'result',
     ];
     public function job()
     {

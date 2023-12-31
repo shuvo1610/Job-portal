@@ -3,19 +3,20 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Assessment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CreateJob; // Ensure this namespace is correct
 use App\Models\JobApplication;
 class ApplyJobController extends Controller
 {
-  
+
     public function showApplyForm($jobId){
-        if(Auth::check()){ 
-          
+        if(Auth::check()){
+
             // $create_jobs = CreateJob::findOrFail($jobId); // Fetch the specific job details
             // return view('frontend.pages.apply', compact('jobId', 'create_jobs'));
-            
+
             $job = CreateJob::findOrFail($jobId);
         return view('frontend.pages.Apply.apply', ['job' => $job]);
         }
@@ -26,6 +27,7 @@ class ApplyJobController extends Controller
 
     public function apply(Request $request, $jobId)
     {
+        $examResult = Assessment::where('user_id',auth()->user()->id)->where('create_job_id',$jobId)->first();
         // Validate the form data
         $validatedData = $request->validate([
             'name' => 'required|string',
@@ -37,6 +39,7 @@ class ApplyJobController extends Controller
         JobApplication::create([
             'user_id' => auth()->user()->id,
             'job_id' => $jobId,
+            'result' => $examResult->obtain_marks,
             'company_name' => $request->input('company_name'),
             'job_name' => $request->input('job_name'),
             'name' => $request->input('name'),
@@ -51,7 +54,7 @@ class ApplyJobController extends Controller
     {
         // Retrieve job applications associated with the authenticated user
         $userApplications = JobApplication::where('user_id', auth()->user()->id)->get();
-    
+
         return view('frontend.pages.Apply.view', compact('userApplications'));
     }
 
@@ -66,5 +69,5 @@ class ApplyJobController extends Controller
 
 }
 
-   
+
 

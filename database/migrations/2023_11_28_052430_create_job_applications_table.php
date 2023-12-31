@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email');
             $table->string('phone_number');
+            $table->string('result')->nullable();
             $table->text('resume')->nullable();
             $table->timestamps();
         });

@@ -76,10 +76,17 @@
                             <li>Application date : <span>{{ $create_jobs->deadline }}</span></li>
                         </ul>
                         <div>
-                            @if (!(auth()->user()->assessment && auth()->user()->assessment->create_job_id == $create_jobs->id))
-                                <a onclick="return confirm('Are you sure you want to start the exam?')" href="{{ route('online.test', $create_jobs->id) }}" class="btn btn-primary">Online Test</a>
+                            @if(auth()->check())
+                                @if (!(auth()->user()->assessment && auth()->user()->assessment->create_job_id == $create_jobs->id))
+                                    <a onclick="return confirm('Are you sure you want to start the exam?')"
+                                       href="{{ route('online.test', $create_jobs->id) }}" class="btn btn-primary">Online
+                                        Test</a>
+                                @else
+                                    <a href="{{ route('job.applyForm', ['jobId' => $create_jobs->id, 'company_name' => $create_jobs->companyName, 'job_name' => $create_jobs->jobTitle]) }}"
+                                       class="btn btn-primary">Apply</a>
+                                @endif
                             @else
-                                <a href="{{ route('job.applyForm', ['jobId' => $create_jobs->id, 'company_name' => $create_jobs->companyName, 'job_name' => $create_jobs->jobTitle]) }}" class="btn btn-primary">Apply</a>
+                                <strong>Login First For Apply</strong>
                             @endif
                         </div>
                     </div>
